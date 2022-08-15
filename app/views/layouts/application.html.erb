@@ -12,14 +12,32 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div class="relative flex items-center h-16">
+            <div class="flex-1 flex items-center sm:items-stretch sm:justify-end">
+              <div class="hidden sm:block sm:ml-6">
+                <div class="flex space-x-4">
+                  <%= link_to 'Groups', groups_path, class: "text-gray-300 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+
+                  <%= link_to 'Signout', destroy_user_session_path, data: { turbo_method: :delete }, class: "text-gray-300 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md text-sm font-medium"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+
     <main class="container mx-auto mt-28 px-5 flex">
-      <% if notice %>
+      <% if false && notice %>
         <p class="alert alert-success"><%= notice %></p>
       <% end %>
-      <% if alert %>
+      <% if false && alert %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>
-
+      
       <%= yield %>
     </main>
   </body>

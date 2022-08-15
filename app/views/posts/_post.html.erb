@@ -1,0 +1,12 @@
+<div id="<%= dom_id post %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= link_to post.title, group_post_path(group, post) %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this post", group_post_path(group, post), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this post', edit_group_post_path(group, post), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
