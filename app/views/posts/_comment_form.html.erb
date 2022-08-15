@@ -1,0 +1,13 @@
+<%= form_with(model: [group, post], class: "contents") do |form| %>
+  <div class="my-5">
+    <%= form.rich_text_area :content %>
+  </div>
+
+  <% if parent_post %>
+    <%= form.hidden_field :post_id, :value => parent_post.id %>
+  <% end %>
+
+  <div class="inline">
+    <%= form.submit 'Comment', class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

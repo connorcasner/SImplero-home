@@ -2,6 +2,8 @@
   <p class="my-5">
     <strong class="block font-medium mb-1">Title:</strong>
     <%= link_to post.title, group_post_path(group, post) %>
+
+    <%= post.content %>
   </p>
 
   <% if action_name != "show" %>

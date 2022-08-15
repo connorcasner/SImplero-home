@@ -11,5 +11,15 @@
       <%= button_to 'Destroy this post', group_post_path(@group, @post), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
     <%= link_to 'Back to group', group_path(@group), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Comments:</strong>
+    </p>
+
+    <% @post.comments.each do |comment| %>
+      <%= render partial: "posts/comment", locals: { comment: comment } %>
+    <% end %>
+
+    <%= render "comment_form", group: @group, post: Post.new, parent_post: @post %>
   </div>
 </div>

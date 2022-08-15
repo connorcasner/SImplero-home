@@ -23,7 +23,10 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params.merge(group_id: @group.id))
+    post_params_with_necessary_id = 
+      post_params[:post_id] ? post_params.except(:group_id) : post_params.merge(group_id: @group.id)
+
+    @post = Post.new(post_params_with_necessary_id)
 
     respond_to do |format|
       if @post.save
@@ -71,6 +74,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :group_id)
+      params.require(:post).permit(:title, :content, :group_id, :post_id)
     end
 end

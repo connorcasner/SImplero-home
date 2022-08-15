@@ -30,12 +30,13 @@
       </nav>
     <% end %>
 
-    <main class="container mx-auto mt-28 px-5 flex">
-      <% if false && notice %>
-        <p class="alert alert-success"><%= notice %></p>
+    <main class="">
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
       <% end %>
-      <% if false && alert %>
-        <p class="alert alert-danger"><%= alert %></p>
+
+      <% if alert.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="notice"><%= alert %></p>
       <% end %>
       
       <%= yield %>
