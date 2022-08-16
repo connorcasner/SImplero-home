@@ -1,6 +1,11 @@
-<%= form_with(model: [group, post], class: "contents") do |form| %>
+<%= form_with(model: [group, post], data: { controller: 'emoji-picker' }, class: "contents") do |form| %>
   <div class="my-5">
-    <%= form.rich_text_area :content %>
+   <%= content_tag(:div, "", class:"pickerContainer", data: {
+        emoji_picker_target: "pickerContainer"
+      }) %>
+    <%= form.rich_text_area :content, data: {
+      emoji_picker_target: "trixEditor"
+    } %>
   </div>
 
   <% if parent_post %>

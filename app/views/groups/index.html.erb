@@ -4,9 +4,11 @@
   </div>
 
   <div class="flex justify-between items-center">
-    <%= link_to 'All groups', groups_path, class: "rounded-lg py-3 px-5 bg-white text-black  hover:text-blue-600 font-medium" %>
-    <%= link_to 'Created by me', groups_path, class: "rounded-lg py-3 px-5 bg-white text-black hover:text-blue-600 font-medium" %>
-    <%= link_to 'Where I am member', groups_path, class: "rounded-lg py-3 px-5 bbg-white text-black  hover:text-blue-600 font-medium" %>
+    <div>
+      <%= link_to 'All groups', groups_path(show: 'all_groups'), class: "rounded-lg py-3 px-5 bg-white text-black border border-black hover:border-blue-600 hover:text-blue-600 font-medium" %>
+      <%= link_to 'Created by me', groups_path(show: 'created_by_me'), class: "rounded-lg py-3 px-5 bg-white text-black border border-black hover:border-blue-600 hover:text-blue-600 font-medium" %>
+      <%= link_to 'Where I am member', groups_path(show: 'where_i_am_member'), class: "rounded-lg py-3 px-5 bbg-white text-black  border border-black hover:border-blue-600  hover:text-blue-600 font-medium" %>
+      </div>
     <%= link_to 'New group', new_group_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
   </div>
 

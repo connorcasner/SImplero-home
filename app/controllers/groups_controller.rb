@@ -1,11 +1,19 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: %i[ show edit update destroy ]
+  before_action :set_group, only: %i[ show edit update destroy join remove_member]
+  # before_action :set_group_by_group_id, only: %i[join remove_member]
 
   # GET /groups or /groups.json
   def index
-    @groups = Group.all
+    if params[:show] == 'where_i_am_member'
+      @groups = current_user.groups
+    elsif params[:show] == 'created_by_me'
+      @groups = Group.created_by_me(current_user)
+    else
+      @groups = Group.all_user_visible_groups(current_user)
+    end
   end
+
 
   # GET /groups/1 or /groups/1.json
   def show
@@ -23,7 +31,7 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-    @group = Group.new(group_params)
+    @group = Group.new(group_params.merge(owner: current_user))
 
     respond_to do |format|
       if @group.save
@@ -59,14 +67,39 @@ class GroupsController < ApplicationController
     end
   end
 
+  # POST /groups/1/join
+  def join
+    if !@group.members.include?(current_user) && current_user != @group.owner
+      @group.members << current_user
+      @group.save!
+
+      redirect_to groups_url, notice: "You are welcome!"
+    end
+  end
+
+  # POST /groups/1/remove_member
+  def remove_member
+    member_for_removing = User.find(params[:member_for_removing_id])
+    if member_for_removing
+      @group.members.delete(member_for_removing)
+      redirect_to group_path, notice: "#{member_for_removing.email} are deleted from group!"
+      @group.save!
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
     end
 
+    def set_group_by_group_id
+      0/0
+      @group = Group.find(params[:group_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, :access)
     end
 end

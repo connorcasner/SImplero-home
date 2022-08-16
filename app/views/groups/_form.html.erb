@@ -16,6 +16,18 @@
     <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <div class="my-5">
+    <p class="my-1">Access</p>
+    <%= form.radio_button :access, 'open_group' %>
+    <%= form.label :open_group, "Open" %>
+
+    <%= form.radio_button :access, 'private_group' %>
+    <%= form.label :private_group, "Private" %>
+
+    <%= form.radio_button :access, 'secret_group' %>
+    <%= form.label :secret_group, "Secret" %>
+  </div>
+
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>

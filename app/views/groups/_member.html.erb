@@ -1,0 +1,9 @@
+<div id="<%= dom_id member %>">
+  <p class="my-5">
+    <%= member.email %>
+    <%= link_to remove_member_group_path(member_for_removing_id: member.id), data: { turbo_method: :post } do %>
+      <i class="fa-solid fa-xmark text-red-600"></i>
+    <% end %>
+
+  </p>
+</div>

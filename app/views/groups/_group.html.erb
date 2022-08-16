@@ -1,12 +1,22 @@
-<div id="<%= dom_id group %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= group.name %>
-  </p>
+<% if !group.secret_group? ||  group.owner == current_user%>
+  <div id="<%= dom_id group %>">
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Group name:</strong>
+      <%= group.name %>
+    </p>
 
-  <% if action_name != "show" %>
-    <%= link_to "Show this group", group, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this group', edit_group_path(group), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+    <% if action_name != "show" %>
+      <%= link_to "Show this group", group, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to 'Edit this group', edit_group_path(group), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+
+      <% if group.owner != current_user && !group.members.include?(current_user) %>
+        <% if group.open_group? %>
+          <%= link_to 'Join', join_group_path(group), data: { turbo_method: :post }, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+        <% elsif group.private_group? %>
+          <%= link_to 'Request to join', edit_group_path(group), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+        <% end %>
+      <% end %>
+      <hr class="mt-6">
+    <% end %>
+  </div>
+<% end %>
