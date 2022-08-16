@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_14_132324) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_16_064851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_132324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "post_id"
+    t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["post_id"], name: "index_posts_on_post_id"
   end
@@ -94,4 +96,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_14_132324) do
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "posts"
+  add_foreign_key "posts", "users", column: "author_id"
 end

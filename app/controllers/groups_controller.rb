@@ -1,8 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_group, only: %i[ show edit update destroy join remove_member]
-  # before_action :set_group_by_group_id, only: %i[join remove_member]
-
+  
   # GET /groups or /groups.json
   def index
     if params[:show] == 'where_i_am_member'
@@ -91,11 +90,6 @@ class GroupsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_group
       @group = Group.find(params[:id])
-    end
-
-    def set_group_by_group_id
-      0/0
-      @group = Group.find(params[:group_id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,5 +1,6 @@
+
 import { Controller } from "@hotwired/stimulus";
-import { createPopup } from "@picmo/popup-picker";
+// import { createPopup } from "@picmo/popup-picker";
 import { RichText } from "../classes/RichText";
 
 // Connects to data-controller="emoji-picker"
