@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   has_many :comments, class_name: 'Post', dependent: :destroy
 
   has_rich_text :content
+
+  validates :title, presence: true, allow_blank: false
 end

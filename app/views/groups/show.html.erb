@@ -21,7 +21,9 @@
     </div>
     <div class="mx-auto col-start-2 col-end-2">
       <strong class="block font-medium mb-1 my-5">Members:</strong>
-      
+
+      <%= render partial: 'member', locals: {member: @group.owner } %>
+
       <%= render partial: 'member', collection: @group.members %>
     </div>
   </div>

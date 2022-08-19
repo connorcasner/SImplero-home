@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   def create
     # post or comment selection
     post_params_with_necessary_id = 
-      post_params[:post_id] ? post_params.except(:group_id) : post_params.merge(group_id: @group.id)
+      post_params[:post_id] ? post_params.except(:group_id).merge(title: 'It\'s comment') : post_params.merge(group_id: @group.id)
 
     post_params_with_necessary_id.merge!(author: current_user)
 
